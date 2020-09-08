@@ -1,0 +1,6 @@
+.idea
+**/__pycache__
+Test/Log
+Test/TestTasks/MainServerRoot/
+Test/TestTasks/ClientTaskRoot/
+Test/TestTasks/Datagen/
