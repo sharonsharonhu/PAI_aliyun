@@ -1,4 +1,4 @@
-import requests
+import requests,json
 
 task_request = {
     "task_name": "test-secure_xgb",
@@ -35,7 +35,7 @@ task_request = {
                 "client_config": {
                     "computation_port": 8085,
                     "client_type": "secure_xgboost_feature",
-                    "data_path": "test-f1"
+                    "data_path": "Splitted_Indexed_Data/credit_default_data1.csv"
                 }
             },
             {
@@ -45,7 +45,7 @@ task_request = {
                 "client_config": {
                     "computation_port": 8083,
                     "client_type": "secure_xgboost_feature",
-                    "data_path": "test-f2"
+                    "data_path": "Splitted_Indexed_Data/credit_default_data2.csv"
                 }
             },
 
@@ -56,8 +56,7 @@ task_request = {
                 "client_config": {
                     "computation_port": 8885,
                     "client_type": "secure_xgboost_label",
-                    "raw_data_path": "test-1",
-                    "out_data_path": "test-2"
+                    "data_path": "Splitted_Indexed_Data/credit_default_label.csv",
                 }
             }
 
@@ -65,6 +64,7 @@ task_request = {
 }
 
 
+print(task_request)
 resp = requests.post("http://127.0.0.1:8380/createTask", json=task_request)
-print(resp.status_code, resp.text)
 
+print(resp.status_code, resp.text)

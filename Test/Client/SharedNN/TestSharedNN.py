@@ -36,15 +36,15 @@ def test_credit_data_2pc():
                              test_per_batches=11, learning_rate=0.1, max_iter=33)
     triplets_provider = TripletProducer(channel1, Logger(prefix="Triplet provider:"), mpc_paras, [2, 3])
     data_client0 = FeatureClient(channel2, Logger(prefix="Data client 0:"), mpc_paras,
-                                 CSVDataLoader("/Users/xue/PycharmProjects/PAI-master/Test/TestDataset/Data/credit_default.csv", list(range(40000)), list(range(30))),
-                                 CSVDataLoader("/Users/xue/PycharmProjects/PAI-master/Test/TestDataset/Data/credit_default.csv", list(range(40000, 50000)), list(range(30))))
+                                 CSVDataLoader("Test/TestDataset/Data/credit_default.csv", list(range(40000)), list(range(30))),
+                                 CSVDataLoader("Test/TestDataset/Data/credit_default.csv", list(range(40000, 50000)), list(range(30))))
     data_client1 = FeatureClient(channel3, Logger(prefix="Data client 1:"), mpc_paras,
-                                 CSVDataLoader("/Users/xue/PycharmProjects/PAI-master/Test/TestDataset/Data/credit_default.csv", list(range(40000)), list(range(30, 72))),
-                                 CSVDataLoader("/Users/xue/PycharmProjects/PAI-master/Test/TestDataset/Data/credit_default.csv", list(range(40000, 50000)), list(range(30, 72))))
+                                 CSVDataLoader("Test/TestDataset/Data/credit_default.csv", list(range(40000)), list(range(30, 72))),
+                                 CSVDataLoader("Test/TestDataset/Data/credit_default.csv", list(range(40000, 50000)), list(range(30, 72))))
 
     label_client = LabelClient(channel4, Logger(prefix="Lable client:"), mpc_paras,
-                               CSVDataLoader("/Users/xue/PycharmProjects/PAI-master/Test/TestDataset/Data/credit_default.csv", list(range(40000)), list(range(72, 73))),
-                               CSVDataLoader("/Users/xue/PycharmProjects/PAI-master/Test/TestDataset/Data/credit_default.csv", list(range(40000, 50000)),
+                               CSVDataLoader("Test/TestDataset/Data/credit_default.csv", list(range(40000)), list(range(72, 73))),
+                               CSVDataLoader("Test/TestDataset/Data/credit_default.csv", list(range(40000, 50000)),
                                              list(range(72, 73))), MSELoss(), AUC_KS, "")
     main_client_start_th = threading.Thread(
         target=main_client.start_train,

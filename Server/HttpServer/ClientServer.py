@@ -13,7 +13,7 @@ client_server = Flask(__name__)
 
 
 class ClientConfig:
-    server_log_path = "Test/Log"
+    server_log_path = "Test/Log/"
     log_level = 0
 
 
@@ -24,7 +24,7 @@ def resp_msg(status="ok", msg=None):
     }
 
 
-logger = Logger(open(ClientConfig.server_log_path + "/client_server-%d_log.txt" % id(client_server), "a+"), level=0)
+logger = Logger(open(ClientConfig.server_log_path + "client_server-%d_log.txt" % id(client_server), "a+"), level=0)
 
 
 @client_server.route("/createTask", methods=["POST"])

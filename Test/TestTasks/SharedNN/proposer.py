@@ -1,6 +1,5 @@
 import requests
 
-
 task_request = {
     "task_name": "test-shared_nn",
     "clients": [
@@ -21,10 +20,10 @@ task_request = {
         {
             "role": "crypto_producer",
             "addr": "127.0.0.1",
-            "http_port": 8082,
+            "http_port": 6666,
             "client_config": {
                 "client_type": "triplet_producer",
-                "computation_port": 8083,
+                "computation_port": 6699,
                 "listen_clients": [2, 3]
             }
         },
@@ -63,7 +62,5 @@ task_request = {
     ]
 }
 
-
 resp = requests.post("http://127.0.0.1:8380/createTask", json=task_request)
 print(resp.status_code, resp.text)
-

@@ -14,7 +14,6 @@ from Utils.Log import Logger
 from Client.Data.DataLoader import CSVDataLoader
 
 
-
 def test_credit_data_2pc():
     # Disable GPU since server do not have any computation other than sigmoid
 
