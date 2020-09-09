@@ -275,6 +275,7 @@ class LabelClient(DataClient):
         except:
             self.logger.logE("Get training config from server failed. Stop training.")
             return False
+
         # send label to main client
         if not self.send_label_to_main():
             return False
