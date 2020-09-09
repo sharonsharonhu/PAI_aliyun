@@ -11,7 +11,7 @@ task_request = {
                 "client_config": {
                     "computation_port": 8378,
                     "client_type": "secure_xgboost_main",
-                    "metric": "auc_ks",
+                    "metric_func": "auc_ks",
                     "config": {
                         "learning_rate": 0.1,
                         "sync_info": {
@@ -35,7 +35,7 @@ task_request = {
                 "client_config": {
                     "computation_port": 8085,
                     "client_type": "secure_xgboost_feature",
-                    "data_path": "Splitted_Indexed_Data/credit_default_data1.csv"
+                    "data_path": "Data/SecureXgb_test_data/party1"
                 }
             },
             {
@@ -45,7 +45,7 @@ task_request = {
                 "client_config": {
                     "computation_port": 8083,
                     "client_type": "secure_xgboost_feature",
-                    "data_path": "Splitted_Indexed_Data/credit_default_data2.csv"
+                    "data_path": "Data/SecureXgb_test_data/party2"
                 }
             },
 
@@ -56,7 +56,7 @@ task_request = {
                 "client_config": {
                     "computation_port": 8885,
                     "client_type": "secure_xgboost_label",
-                    "data_path": "Splitted_Indexed_Data/credit_default_label.csv",
+                    "data_path": "Data/SecureXgb_test_data/label",
                 }
             }
 
