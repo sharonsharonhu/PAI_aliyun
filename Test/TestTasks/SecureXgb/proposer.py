@@ -11,7 +11,7 @@ task_request = {
                 "client_config": {
                     "computation_port": 8378,
                     "client_type": "secure_xgboost_main",
-                    "metric_func": "auc_ks",
+                    "metric": "auc_ks",
                     "config": {
                         "learning_rate": 0.1,
                         "sync_info": {
@@ -68,3 +68,4 @@ print(task_request)
 resp = requests.post("http://127.0.0.1:8380/createTask", json=task_request)
 
 print(resp.status_code, resp.text)
+

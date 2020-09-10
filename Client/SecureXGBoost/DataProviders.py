@@ -68,7 +68,7 @@ class FeatureClient(DataClient):
         self.col_sample_ratio = config["col_sample_ratio"]
         self.row_sample_ratio = config["row_sample_ratio"]
 
-    def _before_trainning(self, wait_for_server: float = 100):
+    def _before_trainning(self, wait_for_server: float = 250):
         """
         Receive config message from server, then initialize some parameters
         After this, send CLIENT_READY message to server
@@ -86,7 +86,7 @@ class FeatureClient(DataClient):
         self.logger.log("Received train conifg message: %s" % msg.data)
         return True
 
-    def start_train(self, wait_for_server: float = 100):
+    def start_train(self, wait_for_server: float = 250):
         """
         Receive config message from server, then initialize some parameters
         After this, send CLIENT_READY message to server
