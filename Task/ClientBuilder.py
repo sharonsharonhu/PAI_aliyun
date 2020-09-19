@@ -69,7 +69,7 @@ def build_Alignment_MainClient(arg_dict: dict):
 
 def build_SecureXGBoost_MainClient(arg_dict: dict):
     client = SecureXGBoost_MainClient(arg_dict["channel"], arg_dict["logger"], arg_dict["mpc_paras"],
-                                 arg_dict["metric"], arg_dict["config"])
+                                 get_metric(arg_dict["metric"]), arg_dict["config"])
     return ClientHandle(client, dict(), client.start_train)
 
 
@@ -83,10 +83,11 @@ def build_SecureXGBoost_FeatureClient(arg_dict: dict):
 def build_SecureXGBoost_LabelClient(arg_dict: dict):
     client = SecureXGBoost_LabelClient(arg_dict["channel"], arg_dict["logger"], arg_dict["mpc_paras"],
                                   CSVDataLoader(arg_dict["data_path"] + "train.csv"),
-                                  CSVDataLoader(arg_dict["data_path"] + "test.csv"),)
+                                  CSVDataLoader(arg_dict["data_path"] + "test.csv"),
+                                       get_metric(arg_dict["metric"]),arg_dict["task_path"])
 
 
-    return ClientHandle(client, dict(), client.start_train)
+    return ClientHandle(client,{"record": lambda: client.test_record}, client.start_train)
 
 client_builder_dict = {
     "triplet_producer": build_TripletProducer,
@@ -103,4 +104,5 @@ client_builder_dict = {
 
 def build_client(arg_dict: dict):
     client_type = arg_dict["client_type"]
+
     return client_builder_dict[client_type](arg_dict)

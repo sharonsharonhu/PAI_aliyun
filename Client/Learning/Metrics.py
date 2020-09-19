@@ -1,5 +1,7 @@
 import numpy as np
-from sklearn.metrics import roc_auc_score, roc_curve
+from sklearn.metrics import roc_auc_score, roc_curve, accuracy_score, precision_score, f1_score, recall_score, log_loss
+import warnings
+warnings.filterwarnings("ignore")
 
 def AUC_KS(y_true, y_pred):
     auc = roc_auc_score(y_true, y_pred)
@@ -7,18 +9,37 @@ def AUC_KS(y_true, y_pred):
     ks = max(tpr - fpr)
     return [auc, ks]
 
-def onehot_accuracy(ys, pred_ys):
-    acc = np.mean(np.argmax(ys, 1) == np.argmax(pred_ys, 1))
-    return acc
+def metrics_pack1(y_true, y_pred):
+    """
+    :param y_true:
+    :param y_pred:
+    :return: ACC, F1, Precision, Recall, logLoss, AUC, KS
+    """
+    return [accuracy_score(y_true, np.round(y_pred)), f1_score(y_true, np.round(y_pred)),
+            precision_score(y_true, np.round(y_pred)), recall_score(y_true, np.round(y_pred)),
+            log_loss(y_true, y_pred)] + AUC_KS(y_true, y_pred)
+
+
+#xgboost
+def metrics_pack2(y_true, y_pred):
+    """
+    :param y_true:
+    :param y_pred:
+    :return: ACC, F1, Precision, Recall, logLoss, AUC, KS
+    """
+    y_pred_binary = (y_pred >= 0.5) * 1
+    return [accuracy_score(y_true, y_pred_binary), f1_score(y_true, y_pred_binary),
+            precision_score(y_true, y_pred_binary), recall_score(y_true, y_pred_binary),
+            log_loss(y_true, y_pred)] + AUC_KS(y_true, y_pred)
 
 metric_dict = {
         "auc": roc_auc_score,
         "auc_ks": AUC_KS,
-        "acc": onehot_accuracy
+        "metrics_pack1": metrics_pack1,
+        "metrics_pack2":metrics_pack2
     }
 
 
 def get_metric(metric_name: str):
     metric_name = metric_name.lower()
     return metric_dict[metric_name]
-

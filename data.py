@@ -1,14 +1,14 @@
 import pandas as pd
 
 df=pd.read_csv('Test/TestDataset/Data/credit_default.csv',header=None)
-df1=df.iloc[:400,:30]
-df2=df.iloc[400:500,:30]
+df1=df.iloc[:40000,:30]
+df2=df.iloc[40000:50000,:30]
 
-df3=df.iloc[:400,30:72]
-df4=df.iloc[400:500,30:72]
+df3=df.iloc[:40000,30:72]
+df4=df.iloc[40000:50000,30:72]
 
-df5=df.iloc[:400,72:73]
-df6=df.iloc[400:500,72:73]
+df5=df.iloc[:40000,72:73]
+df6=df.iloc[40000:50000,72:73]
 
 
 df1.to_csv('Test/TestDataset/GeneratedData/Data/SecureXgb_test_data/party1/train.csv')
